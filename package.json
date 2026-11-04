@@ -2,6 +2,14 @@
   "name": "vue-select-kit",
   "version": "0.1.0",
   "description": "A feature-rich select component plugin for Vue 3 (JS & TS).",
+  "homepage": "https://anik511.github.io/vue-select-kit/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anik511/vue-select-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anik511/vue-select-kit/issues"
+  },
   "main": "./dist/vue-select-kit.umd.cjs",
   "scripts": {
     "dev": "vite --config vite.playground.config.ts",
@@ -23,7 +31,7 @@
     "autocomplete",
     "typescript"
   ],
-  "author": "",
+  "author": "anik511",
   "license": "MIT",
   "type": "module",
   "devDependencies": {

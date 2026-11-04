@@ -1,6 +1,8 @@
 # vue-select-kit
 
-A feature-rich select component for Vue 3: single/multiple, tags, filtering, remote search, option groups, allow-create, virtual scrolling. Written in TypeScript, shipped as plain JS + `.d.ts`, so it works in **both JavaScript and TypeScript** Vue 3 projects. No runtime dependencies besides `vue` (≥ 3.3).
+A feature-rich select component for Vue 3: single/multiple, tags, filtering, remote search, option groups, allow-create, virtual scrolling. Written in TypeScript, shipped as plain JS + `.d.ts`, so it works in **both JavaScript and TypeScript** Vue 3 projects. No runtime dependencies besides `vue` (≥ 3.3). Works with both the Composition API and the Options API.
+
+**📖 Documentation & live examples: https://anik511.github.io/vue-select-kit/**
 
 ## Install
 
