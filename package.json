@@ -1,0 +1,57 @@
+{
+  "name": "vue-select-kit",
+  "version": "0.1.0",
+  "description": "A feature-rich select component plugin for Vue 3 (JS & TS).",
+  "main": "./dist/vue-select-kit.umd.cjs",
+  "scripts": {
+    "dev": "vite --config vite.playground.config.ts",
+    "build": "vite build",
+    "test": "vitest run",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "select",
+    "dropdown",
+    "virtual-scroll",
+    "el-select",
+    "multiselect",
+    "autocomplete",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/test-utils": "^2.5.1",
+    "jsdom": "^30.1.3",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.5",
+    "vite-plugin-dts": "^5.1.2",
+    "vitest": "^5.1.0",
+    "vue": "^3.5.44",
+    "vue-tsc": "^3.3.14"
+  },
+  "module": "./dist/vue-select-kit.mjs",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/vue-select-kit.mjs",
+      "require": "./dist/vue-select-kit.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  }
+}

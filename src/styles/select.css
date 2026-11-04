@@ -1,0 +1,238 @@
+:root {
+  --vs-primary: #3b6ef5;
+  --vs-primary-soft: #ecf1fe;
+  --vs-text: #303133;
+  --vs-text-muted: #8a8f99;
+  --vs-placeholder: #a8abb2;
+  --vs-border: #dcdfe6;
+  --vs-border-hover: #c0c4cc;
+  --vs-bg: #ffffff;
+  --vs-bg-disabled: #f5f7fa;
+  --vs-hover: #f5f7fa;
+  --vs-tag-bg: #f0f2f5;
+  --vs-radius: 6px;
+  --vs-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --vs-height: 32px;
+  --vs-font-size: 14px;
+  --vs-z-index: 2000;
+}
+
+.vs-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 240px;
+  min-height: var(--vs-height);
+  padding: 2px 8px 2px 12px;
+  gap: 6px;
+  font-size: var(--vs-font-size);
+  color: var(--vs-text);
+  background: var(--vs-bg);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  vertical-align: middle;
+}
+.vs-select:hover { border-color: var(--vs-border-hover); }
+.vs-select.is-focused {
+  border-color: var(--vs-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--vs-primary) 18%, transparent);
+}
+.vs-select.is-disabled {
+  cursor: not-allowed;
+  background: var(--vs-bg-disabled);
+  border-color: var(--vs-border);
+  box-shadow: none;
+  color: var(--vs-placeholder);
+}
+.vs-select--large { --vs-height: 40px; --vs-font-size: 15px; }
+.vs-select--small { --vs-height: 24px; --vs-font-size: 12px; padding-left: 8px; }
+
+.vs-select__prefix,
+.vs-select__suffix {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--vs-text-muted);
+}
+
+.vs-select__selection {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.vs-select__input {
+  flex: 1;
+  min-width: 24px;
+  width: 100%;
+  height: calc(var(--vs-height) - 6px);
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: inherit;
+}
+.vs-select.is-multiple .vs-select__input { width: auto; }
+.vs-select.is-filterable.is-open .vs-select__input { cursor: text; }
+.vs-select__input::placeholder { color: var(--vs-placeholder); }
+
+.vs-select__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.vs-select__arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s;
+}
+.vs-select__arrow.is-reverse { transform: rotate(180deg); }
+
+.vs-select__clear {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vs-placeholder);
+  cursor: pointer;
+}
+.vs-select__clear:hover { color: var(--vs-text-muted); }
+.vs-select__clear svg { width: 14px; height: 14px; }
+
+/* tags */
+.vs-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  max-width: 100%;
+  height: calc(var(--vs-height) - 10px);
+  padding: 0 6px;
+  box-sizing: border-box;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--vs-text);
+  background: var(--vs-tag-bg);
+  border-radius: 4px;
+}
+.vs-tag.is-info { color: var(--vs-text-muted); }
+.vs-tag__text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vs-tag__close {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--vs-text-muted);
+  cursor: pointer;
+}
+.vs-tag__close:hover { background: var(--vs-text-muted); color: #fff; }
+.vs-tag__close svg { width: 12px; height: 12px; }
+
+.vs-select__collapsed { position: relative; display: inline-flex; }
+.vs-select__tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: calc(var(--vs-z-index) + 1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: max-content;
+  max-width: 280px;
+  padding: 8px;
+  background: var(--vs-bg);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  box-shadow: var(--vs-shadow);
+  cursor: default;
+}
+
+/* dropdown */
+.vs-select-dropdown {
+  z-index: var(--vs-z-index);
+  box-sizing: border-box;
+  padding: 4px 0;
+  font-size: 14px;
+  color: var(--vs-text);
+  background: var(--vs-bg);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  box-shadow: var(--vs-shadow);
+  text-align: left;
+  cursor: default;
+}
+.vs-select-dropdown__list,
+.vs-virtual-list__content,
+.vs-option-group__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.vs-select-dropdown__list { overflow-y: auto; }
+.vs-virtual-list { overflow-y: auto; }
+.vs-select-dropdown__header,
+.vs-select-dropdown__footer { padding: 8px 12px; }
+.vs-select-dropdown__header { border-bottom: 1px solid var(--vs-border); }
+.vs-select-dropdown__footer { border-top: 1px solid var(--vs-border); }
+.vs-select-dropdown__empty {
+  padding: 10px 0;
+  text-align: center;
+  color: var(--vs-text-muted);
+}
+
+.vs-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-height: 34px;
+  padding: 0 32px 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.vs-option__label { overflow: hidden; text-overflow: ellipsis; }
+.vs-option.is-hovered { background: var(--vs-hover); }
+.vs-option.is-selected { color: var(--vs-primary); font-weight: 600; }
+.vs-option.is-disabled { color: var(--vs-placeholder); cursor: not-allowed; background: none; }
+.vs-option.is-created { color: var(--vs-text-muted); font-style: italic; }
+.vs-option__check {
+  position: absolute;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+}
+
+.vs-option-group { list-style: none; }
+.vs-option-group__title {
+  box-sizing: border-box;
+  padding: 0 16px;
+  line-height: 30px;
+  font-size: 12px;
+  color: var(--vs-text-muted);
+  list-style: none;
+}
+
+/* transition */
+.vs-zoom-enter-active,
+.vs-zoom-leave-active { transition: opacity 0.15s, transform 0.15s; }
+.vs-zoom-enter-from,
+.vs-zoom-leave-to { opacity: 0; transform: scaleY(0.9); }
+.vs-select-dropdown.is-bottom { transform-origin: center top; }
+.vs-select-dropdown.is-top { transform-origin: center bottom; }
