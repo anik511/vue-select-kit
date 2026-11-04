@@ -1,6 +1,7 @@
 // Each demo's source code is loaded raw from its own file, so the code shown always matches the demo.
-const components = import.meta.glob('./*.vue', { eager: true, import: 'default' })
-const sources = import.meta.glob('./*.vue', { eager: true, query: '?raw', import: 'default' })
+// ./X.vue is the Composition API version, ./options/X.vue the Options API version.
+const components = import.meta.glob(['./*.vue', './options/*.vue'], { eager: true, import: 'default' })
+const sources = import.meta.glob(['./*.vue', './options/*.vue'], { eager: true, query: '?raw', import: 'default' })
 
 const meta = [
   ['Basic', 'Basic usage', 'Bind the selected value with <code>v-model</code> and list choices with <code>&lt;VsOption&gt;</code>. If you leave out <code>label</code>, the option shows its <code>value</code>.'],
@@ -26,9 +27,16 @@ const meta = [
 
 export const examples = meta.map(([file, title, description]) => ({
   id: `example-${file.replace(/[A-Z]/g, (c, i) => (i ? '-' : '') + c.toLowerCase())}`,
-  file: `${file}.vue`,
   title,
   description,
-  component: components[`./${file}.vue`],
-  source: sources[`./${file}.vue`],
+  composition: {
+    file: `examples/${file}.vue`,
+    component: components[`./${file}.vue`],
+    source: sources[`./${file}.vue`],
+  },
+  options: {
+    file: `examples/options/${file}.vue`,
+    component: components[`./options/${file}.vue`],
+    source: sources[`./options/${file}.vue`],
+  },
 }))

@@ -103,3 +103,11 @@ export const cssVars = [
   ['--vs-font-size', 'Font size (set per size)', '14px'],
   ['--vs-z-index', 'Dropdown z-index', '2000'],
 ]
+
+export const apiStyles = [
+  ['Selected value', "const value = ref('')", "data() { return { value: '' } }"],
+  ['Event handler', 'function onChange(v) {}', 'methods: { onChange(v) {} }'],
+  ['Remote method', ':remote-method="search" (a function)', ':remote-method="search" (a method)'],
+  ['Call a method', 'select.value.toggleMenu()', 'this.$refs.select.toggleMenu()'],
+  ['Local registration', 'import in &lt;script setup&gt;', 'components: { VsSelect, VsOption }'],
+]

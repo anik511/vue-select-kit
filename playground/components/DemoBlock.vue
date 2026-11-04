@@ -1,12 +1,16 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { apiStyle } from '../apiStyle.js'
+import ApiSwitch from './ApiSwitch.vue'
 import CodeBlock from './CodeBlock.vue'
 
-defineProps({
+const props = defineProps({
   example: { type: Object, required: true },
 })
 
 const showCode = ref(false)
+// the live demo runs the same file whose code is shown
+const variant = computed(() => props.example[apiStyle.value])
 </script>
 
 <template>
@@ -18,15 +22,16 @@ const showCode = ref(false)
     <p class="demo__desc" v-html="example.description" />
     <div class="demo__card">
       <div class="demo__preview">
-        <component :is="example.component" />
+        <component :is="variant.component" :key="apiStyle" />
       </div>
       <div class="demo__toolbar">
-        <span class="demo__file">examples/{{ example.file }}</span>
+        <ApiSwitch small />
+        <span class="demo__file">{{ variant.file }}</span>
         <button type="button" class="demo__toggle" :aria-expanded="showCode" @click="showCode = !showCode">
           {{ showCode ? 'Hide code' : 'Show code' }}
         </button>
       </div>
-      <CodeBlock v-if="showCode" :code="example.source" />
+      <CodeBlock v-if="showCode" :code="variant.source" />
     </div>
   </section>
 </template>

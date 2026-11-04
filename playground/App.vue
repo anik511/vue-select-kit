@@ -2,6 +2,8 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import DemoBlock from './components/DemoBlock.vue'
 import CodeBlock from './components/CodeBlock.vue'
+import CodeTabs from './components/CodeTabs.vue'
+import ApiSwitch from './components/ApiSwitch.vue'
 import ApiTable from './components/ApiTable.vue'
 import { examples } from './examples'
 import * as api from './api.js'
@@ -14,6 +16,7 @@ const menu = [
       { id: 'introduction', label: 'Introduction' },
       { id: 'installation', label: 'Installation' },
       { id: 'quick-start', label: 'Quick start' },
+      { id: 'api-styles', label: 'Composition & Options API' },
       { id: 'typescript', label: 'TypeScript & JavaScript' },
     ],
   },
@@ -110,6 +113,10 @@ const features = [
   <div class="layout">
     <aside class="sidebar" :class="{ 'is-open': sidebarOpen }">
       <input v-model="search" class="sidebar__search" type="search" placeholder="Search docs…" aria-label="Search docs" />
+      <div class="sidebar__api">
+        <span>Show code for</span>
+        <ApiSwitch />
+      </div>
       <nav>
         <div v-for="group in filteredMenu" :key="group.title" class="nav-group">
           <button
@@ -152,12 +159,16 @@ const features = [
         <CodeBlock :code="code.install" lang="bash" />
 
         <h3>Register globally</h3>
+        <p>
+          Register once in your entry file. This step is the same whether your components use the
+          Composition API or the Options API.
+        </p>
         <CodeBlock :code="code.registerGlobal" lang="js" />
         <CodeBlock :code="code.registerPrefix" lang="js" />
 
         <h3>Import per component</h3>
         <p>Skip <code>app.use()</code> and import only what a component needs:</p>
-        <CodeBlock :code="code.registerLocal" />
+        <CodeTabs v-bind="code.registerLocal" />
 
         <h3>Without a build step (UMD)</h3>
         <p>The UMD build exposes a global <code>VueSelectKit</code>; the plugin is <code>VueSelectKit.default</code>.</p>
@@ -166,8 +177,20 @@ const features = [
 
       <section id="quick-start" data-section>
         <h2>Quick start</h2>
-        <CodeBlock :code="code.quickStart" />
+        <CodeTabs v-bind="code.quickStart" />
         <p>See the <a href="#example-basic" @click.prevent="go('example-basic')">examples</a> below for every feature.</p>
+      </section>
+
+      <section id="api-styles" data-section>
+        <h2>Composition &amp; Options API</h2>
+        <p>
+          The components work the same with both API styles; only how you write your own component changes.
+          Every code sample on this page has both versions. Use the switch in the sidebar or on any example to
+          change which one is shown (your choice is remembered). The live demos run the version you pick.
+        </p>
+        <ApiTable :columns="['', 'Composition API', 'Options API']" :rows="api.apiStyles" :code-columns="[1, 2]" />
+        <h3>Calling exposed methods</h3>
+        <CodeTabs v-bind="code.templateRef" />
       </section>
 
       <section id="typescript" data-section>
@@ -184,7 +207,7 @@ const features = [
             <code>&lt;VsSelect&gt;</code> in your templates.
           </li>
         </ul>
-        <CodeBlock :code="code.typescript" />
+        <CodeTabs v-bind="code.typescript" />
         <p>
           Exported types: <code>SelectProps</code>, <code>OptionProps</code>, <code>OptionGroupProps</code>,
           <code>OptionData</code>, <code>OptionPropsMapping</code>, <code>SelectSize</code>, <code>Placement</code>.
